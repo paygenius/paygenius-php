@@ -11,22 +11,8 @@
 
 namespace PayGenius;
 
-/**
- * Constructs the validation request.
- */
-class ValidateRequest extends AbstractRequest
+interface Validateable
 {
-    public $body;
 
-    public function __construct($body = null)
-    {
-        parent::__construct('util/validate', empty($body) ? 'GET' : 'POST');
-
-        $this->body = $body;
-    }
-
-    public function validate()
-    {
-
-    }
+    function validate();
 }

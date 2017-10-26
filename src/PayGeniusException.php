@@ -11,22 +11,15 @@
 
 namespace PayGenius;
 
-/**
- * Constructs the validation request.
- */
-class ValidateRequest extends AbstractRequest
+class PayGeniusException extends \Exception
 {
-    public $body;
+    const TYPE_UNKNOWN        = 0;
+    const TYPE_AUTHENTICATION = -1;
+    const TYPE_VALIDATION     = -2;
+    const TYPE_COMMUNICATION  = -3;
 
-    public function __construct($body = null)
+    function __construct($message, $code, \Exception $previous = null)
     {
-        parent::__construct('util/validate', empty($body) ? 'GET' : 'POST');
-
-        $this->body = $body;
-    }
-
-    public function validate()
-    {
-
+        parent::__construct($message, $code, $previous);
     }
 }

@@ -11,18 +11,20 @@
 
 namespace PayGenius;
 
-/**
- * Constructs the validation request.
- */
-class ValidateRequest extends AbstractRequest
+class PageLookupRequest extends AbstractRequest
 {
-    public $body;
+    public $reference;
 
-    public function __construct($body = null)
+    function __construct($reference = null)
     {
-        parent::__construct('util/validate', empty($body) ? 'GET' : 'POST');
+        parent::__construct('page/%s', 'GET');
 
-        $this->body = $body;
+        $this->reference = $reference;
+    }
+
+    public function getEndpoint()
+    {
+        return sprintf(parent::getEndpoint(), $this->reference);
     }
 
     public function validate()

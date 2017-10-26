@@ -12,21 +12,16 @@
 namespace PayGenius;
 
 /**
- * Constructs the validation request.
+ * Description of PaymentMethod
+ *
+ * @author william
  */
-class ValidateRequest extends AbstractRequest
+abstract class PaymentMethod implements Validateable
 {
-    public $body;
+    public $method;
 
-    public function __construct($body = null)
+    function __construct($method)
     {
-        parent::__construct('util/validate', empty($body) ? 'GET' : 'POST');
-
-        $this->body = $body;
-    }
-
-    public function validate()
-    {
-
+        $this->method = $method;
     }
 }
