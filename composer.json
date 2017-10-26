@@ -11,8 +11,8 @@
     ],
     "require": {},
     "autoload": {
-    	"psr-0": {
-    		"PayGenius" : "src"
+    	"psr-4": {
+          "PayGenius\\" : "src/"
     	}
     }
 }
