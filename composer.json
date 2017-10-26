@@ -1,5 +1,5 @@
 {
-    "name": "paygenius/paygenius",
+    "name": "paygenius/paygenius-php",
     "description": "PayGenius PHP integration library",
     "type": "library",
     "license": "MIT",
