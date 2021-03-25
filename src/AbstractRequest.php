@@ -19,6 +19,8 @@ abstract class AbstractRequest implements Validateable
     public $time;
     private $endpoint;
     private $method;
+    private $version;
+
 
     /**
      * Constructor for the base request.
@@ -26,11 +28,12 @@ abstract class AbstractRequest implements Validateable
      * @param string $endpoint The endpoint to use.
      * @param string $method The request method.
      */
-    function __construct($endpoint, $method = 'POST')
+    function __construct($endpoint, $method = 'POST', $version = 'v2')
     {
         $this->time     = date('c');
         $this->endpoint = $endpoint;
         $this->method   = $method;
+        $this->version   = $version;
     }
 
     /**
@@ -51,5 +54,15 @@ abstract class AbstractRequest implements Validateable
     function getMethod()
     {
         return $this->method;
+    }
+
+    /**
+     * Gets the PayGenius API version for this request. (Defaults to v2)
+     *
+     * @return string The API version for this request.
+     */
+    function getVersion()
+    {
+        return $this->version;
     }
 }

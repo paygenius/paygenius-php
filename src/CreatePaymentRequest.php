@@ -68,6 +68,10 @@ class CreatePaymentRequest extends AbstractRequest
 
             if (!empty($transactionErrors)) {
                 $errors['transaction'] = $transactionErrors;
+            } else {
+                if ($this->transaction->currency != 'ZAR') {
+                    $errors['transaction.currency'] = 'Forex currencies (non-ZAR) not allowed on this API. Please use CreateForexPaymentRequest';
+                }
             }
         }
 

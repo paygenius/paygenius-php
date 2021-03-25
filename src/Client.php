@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2016 Methys Digital
+ * Copyright (c) 2021 Methys Digital
  * All rights reserved.
  *
  * This software is the confidential and proprietary information of Methys Digital.
@@ -28,7 +28,8 @@ class Client
      *
      * @param string $token The PayGenius application token
      * @param string $secret The PayGenius secret key
-     * @param string $endpoint The base PayGenius end point URL
+     * @param string $endpoint The base PayGenius end point URL excluding Paygenius API version (eg: 'https://developer.paygenius.co.za/pg/api')
+     * The API version is now provided by AbstractRequest 
      * 
      * @param Closure $logger A Closure that accepts the message to print. This should be null in production.
      */
@@ -41,7 +42,7 @@ class Client
     }
 
     /**
-     * Creates a credit card payment.
+     * Creates a credit card payment for currency ZAR.
      *
      * @param CreatePaymentRequest $request
      * @return type
@@ -50,6 +51,18 @@ class Client
     {
         return $this->send($request);
     }
+
+    /**
+     * Creates a forex credit card payment request (non-ZAR) .
+     *
+     * @param CreateForexPaymentRequest $request
+     * @return type
+     */
+    public function createForexPayment(CreateForexPaymentRequest $request)
+    {
+        return $this->send($request);
+    }
+
 
     /**
      * Creates an instant EFT payment.
@@ -129,7 +142,7 @@ class Client
             throw new PayGeniusValidationException($errors);
         }
 
-        $endpoint = $this->endpoint.'/'.$request->getEndpoint();
+        $endpoint = $this->endpoint.'/'.$request->getVersion().'/'.$request->getEndpoint();
 
         $this->log(sprintf('PayGenius %s Request: %s', $request->getMethod(), $endpoint));
 
