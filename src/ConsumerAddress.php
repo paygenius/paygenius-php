@@ -40,18 +40,20 @@ class ConsumerAddress implements Validateable
     {
         $errors = [];
 
-        if (Util\Validation::isEmpty($this->name)) {
-            $errors['name'] = 'Missing';
+        if (Util\Validation::isEmpty($this->addressLineOne)) {
+            $errors['addressLineOne'] = 'Missing';
         }
 
-        if (Util\Validation::isEmpty($this->surname)) {
-            $errors['surname'] = 'Missing';
+        if (Util\Validation::isEmpty($this->city)) {
+            $errors['city'] = 'Missing';
         }
 
-        if (Util\Validation::isEmpty($this->email)) {
-            $errors['email'] = 'Missing';
-        } else if (!Util\Validation::isEmail($this->email)) {
-            $errors['email'] = 'Invalid';
+        if (Util\Validation::isEmpty($this->postCode)) {
+            $errors['postCode'] = 'Missing';
+        }
+
+        if (Util\Validation::isEmpty($this->country)) {
+            $errors['country'] = 'country';
         }
 
         return $errors;
