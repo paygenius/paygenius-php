@@ -16,12 +16,14 @@ class Urls implements Validateable
     public $success;
     public $cancel;
     public $error;
+    public $notify;
 
-    function __construct($success, $error, $cancel = null)
+    function __construct($success, $error, $cancel = null, $notify = null)
     {
         $this->success = $success;
         $this->error   = $error;
         $this->cancel  = $cancel == null ? $error : $cancel;
+        $this->notify  = $notify;
     }
 
     public function validate()
@@ -44,6 +46,12 @@ class Urls implements Validateable
             $errors['error'] = 'Missing';
         } elseif (!Util\Validation::isUrl($this->error)) {
             $errors['error'] = 'Invalid';
+        }
+
+        if (Util\Validation::isEmpty($this->notify) == false) {
+            if (!Util\Validation::isUrl($this->notify)) {
+                $errors['notify'] = 'Invalid';
+            }
         }
 
         return $errors;
